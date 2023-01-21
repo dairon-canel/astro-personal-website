@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -23,6 +25,7 @@
 html,
 body {
   height: 100%;
+  font-family: 'Roboto', sans-serif;
 }
 /*
   Typographic tweaks!
@@ -32,7 +35,17 @@ body {
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  margin: auto;
+  padding: 20px;
+  max-width: 65ch;
+  text-align: left;
+  background-color: #fff;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.5;
+  color: #444;
 }
+
 /*
   6. Improve media defaults
 */
@@ -71,4 +84,12 @@ h6 {
 #root,
 #__next {
   isolation: isolate;
+}
+
+a {
+  @apply inline-block no-underline;
+}
+
+a.active {
+  @apply font-bold underline;
 }
