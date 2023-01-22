@@ -1,9 +1,12 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../config';
+import classNames from 'classnames';
+
+const parentClass = Astro.props.class;
 ---
 
-<header class="mb-[2em]">
+<header class={classNames('mb-[2em] h-fit', parentClass)}>
   <h2 class="my-[0.5em]">
     {SITE_TITLE}
   </h2>
