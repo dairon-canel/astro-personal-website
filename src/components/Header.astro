@@ -1,19 +1,17 @@
 ---
-import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../config';
-import classNames from 'classnames';
-
-const parentClass = Astro.props.class;
+import NavLink from './NavLink.astro';
 ---
 
-<header class={classNames('mb-[2em] h-fit', parentClass)}>
-  <h2 class="my-[0.5em]">
-    {SITE_TITLE}
-  </h2>
-  <nav>
-    <HeaderLink href="/">Home</HeaderLink>
-    <HeaderLink href="/blog">Guestbook</HeaderLink>
-    <HeaderLink href="/blog">Blog</HeaderLink>
-    <HeaderLink href="/about">About</HeaderLink>
-  </nav>
-</header>
+<div class="navbar mb-8">
+  <div class="flex-1">
+    <a href="/" class="btn btn-ghost -ml-6 text-xl">DC</a>
+  </div>
+  <div class="flex-none">
+    <ul class="menu menu-horizontal px-1">
+      <li><NavLink href="/guestbook">Guestbook</NavLink></li>
+      <li>
+        <NavLink href="/blog">Blog</NavLink>
+      </li>
+    </ul>
+  </div>
+</div>

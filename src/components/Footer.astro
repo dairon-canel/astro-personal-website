@@ -1,19 +1,44 @@
 ---
+import NavLink from './NavLink.astro';
+
 const today = new Date();
 ---
 
-<footer class="pt-10 px-10 bg-base-100 text-base-content">
-  <div class="footer">
+<footer class="pt-10 bg-base-100 text-base-content">
+  <div class="footer grid-flow-row sm:grid-flow-col">
     <div>
-      <span class="footer-title">Services</span>
-      <a class="link link-hover">Branding</a>
-      <a class="link link-hover">Design</a>
-      <a class="link link-hover">Marketing</a>
-      <a class="link link-hover">Advertisement</a>
+      <span class="footer-title">Nav</span>
+      <NavLink href="/" class="link link-hover">Home</NavLink>
+      <NavLink href="/blog" class="link link-hover">Blog</NavLink>
+      <NavLink href="/guestbook" class="link link-hover">Guestbook</NavLink>
+    </div>
+    <div>
+      <span class="footer-title">Contact</span>
+      <NavLink
+        href="https://github.com/dairon-canel"
+        target="_blank"
+        class="link link-hover"
+      >
+        Github
+      </NavLink>
+      <NavLink
+        href="https://www.linkedin.com/in/dairon-canel/"
+        target="_blank"
+        class="link link-hover"
+      >
+        LinkedIn
+      </NavLink>
+      <NavLink
+        href="https://www.frontendmentor.io/profile/RyuzakCoder"
+        target="_blank"
+        class="link link-hover"
+      >
+        Frontend Mentor
+      </NavLink>
     </div>
     <div>
       <span class="footer-title">Newsletter</span>
-      <div class="form-control">
+      <div class="form-control w-full">
         <label class="label">
           <span class="label-text">Enter your email address</span>
         </label>
@@ -21,7 +46,7 @@ const today = new Date();
           <input
             type="text"
             placeholder="username@site.com"
-            class="input input-bordered w-full pr-16"
+            class="input input-bordered w-full"
           />
           <button class="btn btn-primary absolute top-0 right-0 rounded-l-none"
             >Subscribe</button
