@@ -1,4 +1,5 @@
 ---
+import Card from '../components/Card.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 // Use Astro.glob() to fetch all posts, and then sort them by date.
@@ -15,14 +16,11 @@ const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
       {
         posts.map(post => (
           <li>
-            <time datetime={post.frontmatter.pubDate}>
-              {new Date(post.frontmatter.pubDate).toLocaleDateString('en-us', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-              })}
-            </time>
-            <a href={post.url}>{post.frontmatter.title}</a>
+            <Card
+              date={post.frontmatter.pubDate}
+              url={post.url}
+              title={post.frontmatter.title}
+            />
           </li>
         ))
       }

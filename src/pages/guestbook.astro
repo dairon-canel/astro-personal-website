@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout>
+  <h1 class="text-3xl font-bold mb-4">Welcome to my Guestbook!</h1>
+  <p class="text-base mb-8">
+    Please leave a comment about your visit to my website. Your feedback is
+    valuable to me and helps me improve my website.
+  </p>
+  <form>
+    <div class="form-control w-full max-w-xs mb-4">
+      <label for="name" class="label">
+        <span class="label-text">What is your name?</span>
+      </label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="Type here"
+        class="input input-bordered w-full max-w-xs"
+      />
+    </div>
+    <div class="form-control mb-4">
+      <label class="label">
+        <span class="label-text">Leave your comment</span>
+      </label>
+      <textarea
+        class="textarea textarea-bordered h-24"
+        placeholder="Your comment"></textarea>
+      <label class="label"> </label>
+    </div>
+    <input type="submit" value="Submit" class="btn btn-primary mb-8" />
+  </form>
+  <h2 class="text-2xl font-medium mt-8 mb-4">Previous Comments:</h2>
+  <div id="comments">
+    <h3 class="text-xl font-bold mb-2">Federico Pereira</h3>
+    <p>
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repudiandae
+      harum nulla cum sapiente libero? Omnis, debitis modi voluptatum neque
+      nostrum doloribus maiores hic explicabo dolorem consequatur rem illo nemo
+      minima?
+    </p>
+    <div class="divider"></div>
+    <h3 class="text-xl font-bold mb-2">Federico Pereira</h3>
+    <p>
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repudiandae
+      harum nulla cum sapiente libero? Omnis, debitis modi voluptatum neque
+      nostrum doloribus maiores hic explicabo dolorem consequatur rem illo nemo
+      minima?
+    </p>
+    <div class="divider"></div>
+    <h3 class="text-xl font-bold mb-2">Federico Pereira</h3>
+    <p>
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repudiandae
+      harum nulla cum sapiente libero? Omnis, debitis modi voluptatum neque
+      nostrum doloribus maiores hic explicabo dolorem consequatur rem illo nemo
+      minima?
+    </p>
+    <div class="divider"></div>
+  </div>
+</BaseLayout>

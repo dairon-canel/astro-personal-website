@@ -1,3 +1,7 @@
+---
+const { date, url, title } = Astro.props;
+---
+
 <>
   <div class="flex items-center justify-center">
     <!-- Card -->
@@ -9,7 +13,7 @@
 
       <!-- Title -->
       <h3 class="font-bold text-3xl mt-2">
-        Rapid Event Notification System at Netflix
+        {title}
       </h3>
 
       <!-- Tags -->
@@ -23,6 +27,15 @@
         Additional credits:
         <a href="#" class="text-primary"> Michael Clark</a>,
         <a href="#" class="text-primary"> Gokhan Ozer</a>
+        <time datetime={date}>
+          {
+            new Date(date).toLocaleDateString('en-us', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+            })
+          }
+        </time>
       </p>
 
       <!-- Description -->
@@ -34,8 +47,9 @@
       </p>
 
       <!-- Button -->
-      <button
+      <a
         class="btn btn-primary tracking-widest py-2 px-5 text-sm mt-6 inline-flex items-center group"
+        href={url}
       >
         <p>READ MORE</p>
         <svg
@@ -51,7 +65,7 @@
             stroke-width="2"
             d="M9 5l7 7-7 7"></path>
         </svg>
-      </button>
+      </a>
     </card>
   </div>
   <div class="divider"></div>
