@@ -4,15 +4,31 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
 
+interface Props {
+  title?: string;
+  description?: string;
+  preloadImage?: string;
+  preloadImageSizes?: string;
+  preloadImageSrcSet?: string;
+  frontmatter?: {
+    minutesRead: string;
+    title: string;
+    file: string;
+    url: string;
+  };
+}
 const {
-  image,
-  title = SITE_TITLE,
-  description = SITE_DESCRIPTION,
+  frontmatter,
+  title,
+  description,
+  preloadImage,
+  preloadImageSizes,
+  preloadImageSrcSet,
 } = Astro.props;
+import '../../styles/global.css';
 ---
 
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" class="scroll-smooth" data-theme="dark">
   <head>
     <BaseHead title={title} description={description} image={image} />
   </head>
