@@ -1,24 +1,44 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 
-export interface Props {
-  content: {
+import CommentsWrapper from '../components/CommentsWrapper';
+import { prisma } from '../lib/prisma';
+const { frontmatter } = Astro.props;
+interface Props {
+  frontmatter: {
+    minutesRead: string;
     title: string;
-    description: string;
-    pubDate?: string;
-    updatedDate?: string;
-    heroImage?: string;
+    file: string;
+    url: string;
   };
 }
-
-const {
-  content: { title, description, pubDate, updatedDate, heroImage },
-} = Astro.props;
+const comments = await prisma?.post.findFirst({
+  where: { url: (frontmatter?.url as string | undefined) ?? undefined },
+  include: { Comment: true },
+  orderBy: { createdAt: 'asc' },
+});
+const initialComments = comments?.Comment;
 ---
 
-<BaseLayout title={title} description={description} image={heroImage}>
-  <article class='prose'>
-    {heroImage && <img width={720} height={360} src={heroImage} alt="" />}
+<BaseLayout frontmatter={frontmatter}>
+  <a rel="prefetch" href="/blog" class="flex items-center gap-x-2 mb-4">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width={1.5}
+      stroke="currentColor"
+      class="w-6 h-6"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
+    </svg>
+    Back to overview
+  </a>
+  <article class="prose">
+    <!--     {heroImage && <img width={720} height={360} src={heroImage} alt="" />}
     <h1 class="text-[2em] mt-[0.25em]">{title}</h1>
     {pubDate && <time>{pubDate}</time>}
     {
@@ -27,8 +47,15 @@ const {
           Last updated on <time>{updatedDate}</time>
         </div>
       )
-    }
+    } -->
     <hr class="border-t-2 border-t-slate-600 my-4" />
     <slot />
   </article>
+  <div>
+    <CommentsWrapper
+      client:visible
+      blogUrl={frontmatter.url}
+      initialComments={initialComments}
+    />
+  </div>
 </BaseLayout>

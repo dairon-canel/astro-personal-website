@@ -2,21 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
 
-interface Props {
-  title?: string;
-  description?: string;
-  preloadImage?: string;
-  preloadImageSizes?: string;
-  preloadImageSrcSet?: string;
-  frontmatter?: {
-    minutesRead: string;
-    title: string;
-    file: string;
-    url: string;
-  };
-}
 const {
   frontmatter,
   title,
@@ -24,17 +10,26 @@ const {
   preloadImage,
   preloadImageSizes,
   preloadImageSrcSet,
-} = Astro.props;
+} = Astro.props as BaseLayoutProps;
+
 import '../../styles/global.css';
+import type { BaseLayoutProps } from '../lib/types';
 ---
 
 <html lang="en" class="scroll-smooth" data-theme="dark">
   <head>
-    <BaseHead title={title} description={description} image={image} />
+    <BaseHead
+      frontmatter={frontmatter}
+      title={title}
+      description={description}
+      preloadImage={preloadImage}
+      preloadImageSizes={preloadImageSizes}
+      preloadImageSrcSet={preloadImageSrcSet}
+    />
   </head>
   <body class="min-h-screen h-fit grid content-between">
     <div>
-      <Header title={SITE_TITLE} />
+      <Header />
       <main class="max-w-[900px]">
         <slot />
       </main>
