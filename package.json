@@ -10,7 +10,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "pscale-login": "C:\\Users\\dcanel\\Downloads\\pscale_0.126.0_windows_amd64\\pscale auth login",
-    "dev-db": "C:\\Users\\dcanel\\Downloads\\pscale_0.126.0_windows_amd64\\pscale connect personal-website dev-environment",
+    "dev-db": "C:\\Users\\dcanel\\Downloads\\pscale_0.126.0_windows_amd64\\pscale connect personal-website",
     "dev-shell": "C:\\Users\\dcanel\\Downloads\\pscale_0.126.0_windows_amd64\\pscale shell personal-website dev-environment"
   },
   "dependencies": {
