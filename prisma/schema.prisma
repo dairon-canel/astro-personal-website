@@ -13,7 +13,6 @@ model Post {
   createdAt  DateTime  @default(now())
   url        String
   like_count Int       @default(0)
-  views      BigInt    @default(1)
   Comment    Comment[]
 }
 
@@ -35,5 +34,10 @@ model Guestbook {
   created_by String   @db.VarChar(256)
   created_at DateTime @default(now()) @db.DateTime(6)
   updated_at DateTime @default(now()) @db.DateTime(6)
+}
+
+model Views {
+  slug  String @id @db.VarChar(128)
+  count BigInt @default(1)
 }
 
