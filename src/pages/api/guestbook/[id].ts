@@ -1,45 +1,70 @@
 import { prisma } from '../../../lib/prisma';
 import type { APIRoute } from 'astro';
 
-export const get: APIRoute = async ({ request }) => {
-  const session = await getSession({ req });
+export const get: APIRoute = async ({ params }) => {
+  try {
+    const id = params.id;
 
-  const { id } = req.query;
-  const { email } = session.user;
-
-  const entry = await prisma.guestbook.findUnique({
-    where: {
-      id: Number(id),
-    },
-  });
-
-  if (req.method === 'GET') {
-    return res.json({
-      id: entry.id.toString(),
-      body: entry.body,
-      created_by: entry.created_by,
-      updated_at: entry.updated_at,
-    });
-  }
-
-  if (!session || email !== entry.email) {
-    return res.status(403).send('Unauthorized');
-  }
-
-  if (req.method === 'DELETE') {
-    await prisma.guestbook.delete({
+    const entry = await prisma?.guestbook.findUnique({
       where: {
         id: Number(id),
       },
     });
-
-    return res.status(204).json({});
+    return new Response(
+      JSON.stringify({
+        id: entry?.id.toString(),
+        body: entry?.body,
+        created_by: entry?.created_by,
+        updated_at: entry?.updated_at,
+      }),
+      {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+  } catch (e) {
+    return new Response(JSON.stringify({ message: e }), {
+      status: 500,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   }
+};
 
-  if (req.method === 'PUT') {
-    const body = (req.body.body || '').slice(0, 500);
+export const del: APIRoute = async ({ params }) => {
+  try {
+    const id = params.id;
 
-    await prisma.guestbook.update({
+    await prisma?.guestbook.delete({
+      where: {
+        id: Number(id),
+      },
+    });
+    return new Response(null, {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  } catch (e) {
+    return new Response(JSON.stringify({ message: e }), {
+      status: 500,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  }
+};
+
+export const post: APIRoute = async ({ params, request }) => {
+  try {
+    const id = params.id;
+    const { body } = await request.json();
+
+    const entry = await prisma?.guestbook.update({
       where: {
         id: Number(id),
       },
@@ -49,11 +74,18 @@ export const get: APIRoute = async ({ request }) => {
       },
     });
 
-    return res.status(201).json({
-      ...entry,
-      body,
+    return new Response(JSON.stringify(entry), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  } catch (e) {
+    return new Response(JSON.stringify({ message: e }), {
+      status: 500,
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
   }
-
-  return res.send('Method not allowed.');
 };
