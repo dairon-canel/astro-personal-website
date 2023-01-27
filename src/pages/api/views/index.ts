@@ -1,16 +1,16 @@
 import { prisma } from '../../../lib/prisma';
 import type { APIRoute } from 'astro';
 
-export const get: APIRoute = async ({ request }) => {
+export const get: APIRoute = async () => {
   try {
-    const totalViews = await prisma?.post.aggregate({
+    const totalViews = await prisma?.views.aggregate({
       _sum: {
-        views: true,
+        count: true,
       },
     });
 
     return new Response(
-      JSON.stringify({ total: totalViews?._sum?.views?.toString() }),
+      JSON.stringify({ total: totalViews?._sum?.count?.toString() }),
       {
         status: 200,
         headers: {
