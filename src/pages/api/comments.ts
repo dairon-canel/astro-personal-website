@@ -3,26 +3,35 @@ import type { Comment } from '@prisma/client';
 import { prisma } from '../../lib/prisma';
 
 export const get: APIRoute = async ({ request }) => {
-  const url = new URL(request.url);
-  const params = new URLSearchParams(url.search);
-  const blogUrl = params.get('blogUrl');
-  if (!blogUrl) {
-    return new Response('No blog url provided', {
-      status: 400,
+  try {
+    const url = new URL(request.url);
+    const params = new URLSearchParams(url.search);
+    const blogUrl = params.get('blogUrl');
+    if (!blogUrl) {
+      return new Response('No blog url provided', {
+        status: 400,
+      });
+    }
+    const comments = await prisma?.post.findFirst({
+      where: { url: (blogUrl as string | undefined) ?? undefined },
+      include: { Comment: true },
+      orderBy: { createdAt: 'asc' },
+    });
+    const allCommentsInDbForPost = comments?.Comment;
+    return new Response(JSON.stringify(allCommentsInDbForPost), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  } catch (e) {
+    return new Response(JSON.stringify({ message: e }), {
+      status: 500,
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
   }
-  const comments = await prisma?.post.findFirst({
-    where: { url: (blogUrl as string | undefined) ?? undefined },
-    include: { Comment: true },
-    orderBy: { createdAt: 'asc' },
-  });
-  const allCommentsInDbForPost = comments?.Comment;
-  return new Response(JSON.stringify(allCommentsInDbForPost), {
-    status: 200,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
 };
 
 export const post: APIRoute = async ({ request }) => {
