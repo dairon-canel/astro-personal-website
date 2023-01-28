@@ -1,5 +1,6 @@
 ---
-const { date, url, title } = Astro.props;
+import ViewsCounter from './ViewsCounter';
+const { date, url, title, readingTime } = Astro.props;
 ---
 
 <>
@@ -45,6 +46,8 @@ const { date, url, title } = Astro.props;
         of actions throughout each session, ranging from renaming a profile to
         watchi...
       </p>
+      <p>{readingTime}ing time</p>
+      <ViewsCounter client:visible slug={url} />
 
       <!-- Button -->
       <a

@@ -11,3 +11,7 @@ export type BaseLayoutProps = {
     url: string;
   };
 };
+
+export type Views = {
+  total: number;
+};
