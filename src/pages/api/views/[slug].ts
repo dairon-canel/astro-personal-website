@@ -2,6 +2,19 @@ import { prisma } from '../../../lib/prisma';
 import type { APIRoute } from 'astro';
 
 export const get: APIRoute = async ({ params }) => {
+  const id = params.id;
+  console.log('TESTING');
+
+  return new Response(JSON.stringify(id), {
+    status: 200,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+};
+
+/* export const get: APIRoute = async ({ params }) => {
+  console.log('API [] GET');
   try {
     const slug = params.slug || '';
 
@@ -25,9 +38,11 @@ export const get: APIRoute = async ({ params }) => {
       },
     });
   }
-};
+}; */
 
-export const post: APIRoute = async ({ params }) => {
+/* export const post: APIRoute = async ({ params }) => {
+  console.log('API [] POST');
+
   try {
     const slug = params.slug || '';
 
@@ -62,4 +77,4 @@ export const post: APIRoute = async ({ params }) => {
       },
     });
   }
-};
+}; */

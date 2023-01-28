@@ -47,7 +47,7 @@ const { date, url, title, readingTime } = Astro.props;
         watchi...
       </p>
       <p>{readingTime}ing time</p>
-      <ViewsCounter client:visible slug={url} />
+      <ViewsCounter client:load slug={url} />
 
       <!-- Button -->
       <a
