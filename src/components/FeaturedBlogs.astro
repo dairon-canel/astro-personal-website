@@ -1,9 +1,24 @@
 ---
 import Card from './Card.astro';
+
+const posts = (await Astro.glob('../pages/blog/*.{md,mdx}'))
+  .filter(post => post.frontmatter.featured)
+  .sort(
+    (a, b) =>
+      new Date(b.frontmatter.pubDate).valueOf() -
+      new Date(a.frontmatter.pubDate).valueOf(),
+  );
 ---
 
 <div class="mb-8">
-  <Card />
-  <Card />
-  <Card />
+  {
+    posts.map(post => (
+      <Card
+        date={post.frontmatter.pubDate}
+        url={post.url}
+        title={post.frontmatter.title}
+        readingTime={post.frontmatter.minutesRead}
+      />
+    ))
+  }
 </div>

@@ -9,6 +9,7 @@ export type BaseLayoutProps = {
     title: string;
     file: string;
     url: string;
+    featured?: boolean;
   };
 };
 
