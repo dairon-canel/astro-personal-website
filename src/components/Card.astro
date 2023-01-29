@@ -1,5 +1,5 @@
 ---
-import ViewsCounter from './ViewsCounter';
+//import ViewsCounter from './ViewsCounter';
 const { date, url, title, readingTime } = Astro.props;
 ---
 
@@ -47,7 +47,7 @@ const { date, url, title, readingTime } = Astro.props;
         watchi...
       </p>
       <p>{readingTime}ing time</p>
-      <ViewsCounter client:load slug={url} />
+      <!-- <ViewsCounter client:load slug={url} /> -->
 
       <!-- Button -->
       <a
