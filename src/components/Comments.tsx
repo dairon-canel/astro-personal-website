@@ -5,7 +5,7 @@ const Comments = ({
   blogUrl,
   initialComments,
 }: {
-  blogUrl: string;
+  blogUrl?: string;
   initialComments?: Comment[];
 }) => {
   const formRef = useRef<HTMLFormElement>(null);
