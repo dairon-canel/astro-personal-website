@@ -39,47 +39,49 @@ const Comments = ({
   };
   return (
     <>
-      <h2 className="text-xl lg:text-2xl mb-4 font-bold">Add a comment</h2>
-      <form
-        onSubmit={onSubmit}
-        ref={formRef}
-        className="flex flex-col lg:w-[50%] items-start"
-      >
-        <label className="flex flex-col mb-2" htmlFor="author">
-          Author
-        </label>
-        <input
-          className="py-2 px-4 bg-white border-secondary border-2 rounded-lg w-full"
-          placeholder="Author"
-          name="author"
-          required
-        />
-        <label className="flex flex-col mb-2 mt-4" htmlFor="comment">
-          Comment
-        </label>
-        <textarea
-          className="py-2 px-4 bg-white border-secondary border-2 rounded-lg w-full"
-          placeholder="Comment"
-          required
-          rows={4}
-          name="comment"
-        ></textarea>
+      <h2 className="text-3xl font-bold mb-4">Add a comment</h2>
+      <form onSubmit={onSubmit} ref={formRef}>
+        <div className="form-control w-full max-w-xs mb-4">
+          <label htmlFor="author" className="label">
+            <span className="label-text">What is your name?</span>
+          </label>
+          <input
+            type="text"
+            id="author"
+            name="author"
+            placeholder="author"
+            className="input input-bordered w-full max-w-xs"
+            required
+          />
+        </div>
+        <div className="form-control mb-4">
+          <label className="label" htmlFor="comment">
+            <span className="label-text">Leave your comment</span>
+          </label>
+          <textarea
+            className="textarea textarea-bordered h-24"
+            placeholder="Your comment"
+            name="comment"
+            required
+          ></textarea>
+          <label className="label"> </label>
+        </div>
         <button
           disabled={formState === 'loading'}
-          className="px-8 mt-4 py-4 bg-secondary text-white rounded-lg lg:hover:scale-[1.04] transition-transform disabled:opacity-50 "
+          className="btn btn-primary mb-8"
           type="submit"
         >
           {formState === 'loading' ? 'Submitting' : 'Submit comment'}
         </button>
       </form>
 
-      <h2 className="text-xl lg:text-2xl mb-4 font-bold">Comments</h2>
+      <h2 className="text-2xl font-medium mt-8 mb-4">Comments</h2>
       {upToDateCommentsQuery?.data && upToDateCommentsQuery?.data.length > 0 ? (
-        <div className="flex flex-col gap-y-4">
+        <div id="comments">
           {upToDateCommentsQuery?.data?.map(comment => (
-            <div key={comment.id} className="flex flex-col">
-              <h3 className="font-bold">{comment.author}</h3>
-              <div>{comment.text}</div>
+            <div key={comment.id}>
+              <h3 className="text-xl font-bold mb-2">{comment.author}</h3>
+              <p>{comment.text}</p>
             </div>
           ))}
         </div>
