@@ -82,6 +82,7 @@ const Comments = ({
             <div key={comment.id}>
               <h3 className="text-xl font-bold mb-2">{comment.author}</h3>
               <p>{comment.text}</p>
+              <div className="divider"></div>
             </div>
           ))}
         </div>

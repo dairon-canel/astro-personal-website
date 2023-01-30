@@ -10,8 +10,16 @@ interface Props {
     title: string;
     file: string;
     url: string;
+    heroImage?: string;
+    pubDate?: string;
+    updatedDate?: string;
   };
 }
+
+const {
+  content: { title, pubDate, updatedDate, heroImage },
+} = Astro.props;
+
 const comments = await prisma?.post.findFirst({
   where: { url: (frontmatter?.url as string | undefined) ?? undefined },
   include: { Comment: true },
@@ -37,8 +45,8 @@ const initialComments = comments?.Comment;
     </svg>
     Back to overview
   </a>
-  <article class="prose">
-    <!--     {heroImage && <img width={720} height={360} src={heroImage} alt="" />}
+  <article class="prose mb-8">
+    {heroImage && <img width={720} height={360} src={heroImage} alt="" />}
     <h1 class="text-[2em] mt-[0.25em]">{title}</h1>
     {pubDate && <time>{pubDate}</time>}
     {
@@ -47,7 +55,7 @@ const initialComments = comments?.Comment;
           Last updated on <time>{updatedDate}</time>
         </div>
       )
-    } -->
+    }
     <hr class="border-t-2 border-t-slate-600 my-4" />
     <slot />
   </article>
